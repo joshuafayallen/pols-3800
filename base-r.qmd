@@ -1,0 +1,33 @@
+---
+engige: knitr 
+knitr: 
+  opts_chunk: 
+    echo: false 
+---
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse) ; library(palmerpenguins)
+
+```
+
+One important thing that you should know how to do is read other people's code! Not everybody is a tidyverse user. So understanding what other people are doing is important! 
+
+
+## Select 
+
+The most basic function that we do is selecting columns. In the tidvyerse we just do this 
+
+
+```{r}
+
+penguins |>
+select(species)
+
+```
+
+
+
+In 

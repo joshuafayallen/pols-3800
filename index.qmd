@@ -1,0 +1,40 @@
+---
+engine: knitr
+---
+
+
+
+# Who is This For? {.unnumbered}
+
+This guide was initially compiled for my Introduction to Political Science Research class however this book is really for anybody who is looking to get started in R and R Studio. The guide itself was to put it mildly a little chaotic and somewhat difficult to navigate. So this is my attempt to correct that. The goal of this guide is to provide a summary of the things that helped me and add some of my own flare. By no means is this meant to be a definitive guide to `R`. Hopefully it is just a gentle guide and a potential reminder of things you already know, or an introduction to things you did not know that R could do. 
+
+This "book" requires a significant amount of attribution to a ton of people. In particular Much of the content is based on [https://github.com/uo-ec607/lectures](https://github.com/uo-ec607/lectures)  by Dr. Grant McDermott, [https://talks.andrewheiss.com/2021-seacen/01-tidyverse.html](https://talks.andrewheiss.com/2021-seacen/01-tidyverse.html) by Dr. Andrew Heiss as well as just general knowledge dispensed from [his blog](https://www.andrewheiss.com/blog/) and peppering him with questions, and [Graphic Design with ggplot2](https://rstudio-conf-2022.github.io/ggplot2-graphic-design/) by Dr. Cédric Scherer. I highly recommend that you check out these sources! As it stands right now I need to go back through and add attribution to the individual chapters. Most of this "book" is me just translating `R` into how I think and what helped me learn `R`.
+
+
+
+
+
+
+
+
+# Pep talk 
+
+::: callout-important
+“There is no way of knowing nothing about a subject to knowing something about a subject without going through a period of much frustration and suckiness... Push through. You'll suck less” 
+
+- Hadley Wickham, author of ggplot2
+
+:::
+
+I sucked at this initially. We all sucked at this initially. You will often miss a comma somewhere, and your code will not run. You will be puzzled why something is not working and get frustrated and not know why your code is running and why somebody else's code is running to find out later you misspelled something. I generated a ton of errors just compiling this guide. You eventually get better at figuring out the likely culprits and more carefully looking at your code. This is just something that comes with practice. 
+
+```{r echo = FALSE}
+
+knitr::include_graphics("figs/learning-r.png")
+
+```
+
+It is 100% okay to Google stuff when working on your analysis, problem sets, . We all do it! If I run into an issue, I do not know how to fix I immediately google it. Remember, the goal of this class is to teach you how to do research `R` is a minor part in the grand scheme of things when you are doing research. My goal is to teach you how to conduct research, not to make you a computer scientist or `R` developer. 
+
+
+:::

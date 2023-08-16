@@ -1,0 +1,235 @@
+---
+engine: knitr
+---
+
+# Writing in Quarto
+
+We have covered what Quarto is, but not how we use it. Quarto is a really great tool because it lets you combine words and code together. It relies on something called markdown and pandoc to generate multiple formats. The details are [covered more extensively across the internet but this link does a really good job distilling what goes on](https://quarto.org/docs/faq/rmarkdown.html). What is incredibly infuriating about Quarto from a new user standpoint boils down to (in my experience) a few things:
+
+- A new syntax to write in 
+
+- Not rendering 
+
+- Things not being where you think they should be
+
+
+
+These are all fixable problems as long as we know what could be going on. For the most part as social scientists we want our documents in one of two formats either word or pdf. In this section we will mostly deal with pdf. 
+
+
+## How to Get a PDF
+
+### Installing Quarto 
+
+The process is relatively straight forward. Just go to [the Quarto website](https://quarto.org/docs/get-started/) and click on the download button. This will install Quarto onto your machine so that is relatively straight forward!
+
+
+To produce pdfs Quarto relies on something called $\LaTeX$. All you really need to know about $\LaTeX$ is that you need it to produce a PDF. To install LaTeX all you need to do is open an R script and copy and paste this code and run it and then type Y and hit enter.
+
+
+
+```{r}
+#| eval: false
+
+rstudioapi::terminalExecute(
+  command = "quarto install tinytex"
+)
+
+```
+
+ It may prompt you to enter your password. This is just the password you use to log into your computer. Nothing will appear when you enter your password but your password is being entered. The reason your computer does this is for the same reason that websites do not display your password. This is installing a very minimal [LaTeX distribution](https://yihui.org/tinytex/). After that is done you can now render PDFs.
+
+
+Do get the output we want we need to do some stuff in order to tell quarto what type of document we want. You add this information at the top of the document like you would with word. However, it looks a little bit different since it relies on YAML(Yet Another Markdown Language) to add in this info.^[Yes this is really what it is called. Some sites use TOML which is an acronym for Tom's Obvious, Minimal Language. Much like political scientists once a joke in a title gets started it is doomed to be repeated.] Your YAML heading should look like this 
+
+
+```yaml 
+title: "Quarto Guide"
+author: "Josh Allen"
+date:  "`r format(Sys.time(), '%m/%d/%y')`"
+format: pdf
+```
+
+From there you can pass additional options to it like what the citation style, the citation engine, the kind of font you want to use etc. So it looks something like this. 
+
+
+```yaml
+title: "Quarto Guide"
+author: "Josh Allen"
+date: # "`r format(Sys.time(), '%m/%d/%y')`" # this is to show you how to add the current date
+format:
+  pdf:
+    toc: false # this turns off the table of contents
+    mainfont: "Cochineal" # the font I like
+    mainfontoptions: 
+      - "Numbers=Proportional"
+      - "Numbers=OldStyle"
+    mathfont: "Libertinus Math"
+    indent: true
+    geometry: margin=1in # one inch margins 
+    biblio-title: "References"
+    cite-method: biblatex
+fontsize: 12pt
+bibliography: ref.bib # specify the bib file 
+biblio-style: apsr # what style to choose 
+```
+
+
+
+
+
+
+## Using Quarto to write 
+
+ If you work in the visual editor than lots of the stuff will be abstracted away. It should look somewhat familiar to a word  
+
+
+```{r}
+#| echo: false
+
+ knitr::include_graphics("figs/visual-default.png")
+ 
+```
+
+
+Lot of the same keyboard shortcuts should work! What changes is now you can insert executable code. The quickest way to do this is by doing `cmd + alt/option + I` on mac or `ctrl + alt/option + I` on a windows. 
+
+
+### Working with the Source Editor 
+
+Personally I do not really like working with the visual editor which may just be because I started using `Rmarkdown` when the visual editor was not very good. One thing to know is that you will have to learn some new syntax to write which is fine and you will eventually get the hang of it. 
+
+### Writing in line 
+
+
+Often times we use *italics*, **bold**, or a mix of ***both*** to emphasize things. In word we would either click the button or in LaTex we would do `\textbf{something like this}`. If you have learned LaTeX you can still do $\textbf{this}$ but you would need to wrap it in dollar signs `$\textbf{}$`. Instead of doing all that what you can do is just take advantage of markdown syntax. In the table we can see how to do this 
+
++-----------------------------------+-------------------------------+
+| Markdown Syntax                   | Output                        |
++===================================+===============================+
+|     *italics* and **bold**        | *italics* and **bold**        |
++-----------------------------------+-------------------------------+
+| `$superscript^2$ / $subscript_2$` | $superscript^2$ / $subscript_2$|
++-----------------------------------+-------------------------------+
+|     ~~strikethrough~~             | ~~strikethrough~~             |
++-----------------------------------+-------------------------------+
+|     `verbatim code`               | `verbatim code`               |
++-----------------------------------+-------------------------------+
+
+
+I have yet to come up with a good mneumonic device on how to remember the difference between italics and bold. Maybe some day. 
+
+
+### Code and Chunk options
+
+What differentiates Quarto from Word is the ability to embed code alongside words. To control how these appear in your document you need to add certain options to your code chunks. The most common thing you will want to do is stop the code from appearing in documents. For your problem sets or presenting to a more technical audience you will want to do this. We can do control that via `echo`. If we want people to see our code than we do `#| echo: true` like this 
+
+
+```{{r show-code}}
+
+#| echo: true 
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = body_mass_g)) +
+geom_histogram()
+```
+
+which produces 
+
+```{r}
+#| echo: true
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = body_mass_g)) +
+geom_histogram()
+
+```
+
+If we do not want to show our code than we just do #| echo: false`
+
+```{{r show-code}}
+
+#| echo: false 
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = body_mass_g)) +
+geom_histogram()
+```
+
+which produces 
+
+```{r}
+#| echo: false
+
+
+ggplot(penguins, aes(x = body_mass_g)) +
+geom_histogram()
+
+```
+
+
+Notice how `ggplot` is warning us about the bin width we choose. To control this we just have to change our chunk options by adding `#| warning: false`
+
+
+```{{r warning-example}}
+
+#| echo: false 
+#| warning: false
+library(palmerpenguins)
+library(ggplot2)
+
+ggplot(penguins, aes(x = body_mass_g)) +
+geom_histogram()
+```
+
+which produces 
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+
+
+ggplot(penguins, aes(x = body_mass_g)) +
+geom_histogram()
+
+```
+
+
+Similarly if we load in the tidyverse or a package with names of similarly named functions we will get warnings and messages like this 
+
+
+```{r}
+library(tidyverse)
+
+```
+
+Again all we need to do to omit this is just change the chunk options 
+
+
+
+
+```{{r message-example}}
+#| message: false
+
+library(tidyverse)
+
+```
+
+
+which produces 
+
+
+
+```{r}
+#| message: false 
+
+library(tidyverse)
+
+```
+
+Notice how there is no big long warning message. One other thing to notice is that I have named the code chunks like `message-example`. This is good practice because it makes hoping around the document a little bit easier. Because it will say failed something to the effect of `quitting on line 12-20 code-for-fig-1`. Which will let you navigate there a bit easier. 

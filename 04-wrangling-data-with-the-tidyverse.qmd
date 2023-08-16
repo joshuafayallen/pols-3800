@@ -1,0 +1,604 @@
+---
+engine: knitr
+---
+
+
+# Intro to the tidyverse
+
+
+As an [object oriented programming language (OOP)](https://en.wikipedia.org/wiki/Object-oriented_programming), R is not particularly user-friendly and thus [`{tidyverse}`](https://www.tidyverse.org/)--a suite of data management, [visualization](https://ggplot2.tidyverse.org/), and [modeling](https://www.tidymodels.org/) packages--aims to turn R into [a more user-friendly functional programming language](https://tidyverse.tidyverse.org/articles/manifesto.html). As one of the project's major developers, Hadley Wickham, recently put it "R is not a language driven by the purity of its philosophy; R is a language designed to get shit done." This may have become some what evident in the indexing section where I talked about `[]`, `[[]]`, and `$`. In general languages like Python only have one way to index an object. 
+
+The tidyverse is actually a collection of packages that share the same underlying philosophy (which we will get to). Generally I will load in the tidyverse like this. 
+
+
+```{r}
+#| message: true 
+
+library(tidyverse)
+
+```
+
+
+```{r}
+#| echo: false
+#| message: false
+
+library(kableExtra)
+
+```
+
+## `dplyr`
+
+:::{.callout}
+ "Happy families are all alike; every unhappy family is unhappy in its own way." - Leon Tolstoy. 
+:::
+
+ Data is often talked about the in the same way. All clean datasets are alike in structure and dignity. Every messy dataset is messy in its own special way.
+
+
+`dplyr` is the tidyverse way to manipulate data and an all around great package. But you need to get the basic functions right. Cleaning data is what you will spend the most time on. 
+
+We will use the `palmerpenguins` and the starwars dataset to demonstrate how to use the `verbs` in `dplyr`
+
+
+```{r load-starwars, eval = TRUE}
+
+data("starwars")
+library(palmerpenguins)
+
+```
+
+
+### `select`
+
+Select is the most intuitive. Select picks out the columns you want or, in some cases, do not want. If we only want the name of the character and the place they are from we feed that name of the columns into select. If you are following along and copying and pasting the code in the guide to see what is going on you may notice that your output differs slightly. That is because behind the scenes I am just using select to cut down on the output. 
+
+
+```{r select-example, eval = FALSE}
+
+select(starwars, name, homeworld)
+
+```
+
+```{r echo = FALSE}
+select(starwars, name, homeworld) |>
+head(5) |>
+knitr::kable()
+```
+
+If we wanted all the columns **except** for name and homeworld we would do this. 
+
+```{r eval = FALSE}
+select(starwars, -name, -homeworld)
+```
+
+```{r echo = FALSE}
+select(starwars, height, mass, ends_with("color"), starships, -name ) |>
+head(5) |>
+knitr::kable()
+```
+
+We can also feed it a range of columns using `:`
+
+```{r eval = FALSE}
+select(starwars, name:hair_color)
+```
+
+```{r echo = FALSE}
+select(starwars, name:hair_color)  |>
+head(5) |>
+knitr::kable()
+```
+
+
+
+
+
+
+### `filter`
+
+Filter is how we subset by rows. To do this we need to tell filter what rows we want! This feels like it should be intuitive, but we have to use some concepts that are likely new to you. Lets say we want characters that are from a particular world in starwars. To do that we do this.
+
+```{r basic-filter, eval = FALSE}
+
+filter(starwars, homeworld == "Naboo") 
+
+```
+
+
+```{r echo = FALSE}
+
+
+filter(starwars, homeworld == "Naboo") |>
+select(name, homeworld) |>
+head(5) |>
+knitr::kable()
+
+
+```
+
+What we are doing here is just creating a dataset with just things from Naboo. We need to set tell `R` what rows we want by setting up some tests. Each time a row meets that condition then `R` is going to grab it. As a reminder these are the kinds of test you can do
+
+
+
+<table>
+  <tr>
+    <th class="cell-center">Test</th>
+    <th class="cell-left">Meaning</th>
+    <th class="cell-center">Test</th>
+    <th class="cell-left">Meaning</th>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x < y</code></td>
+    <td class="cell-left">Less than</td>
+    <td class="cell-center"><code class="remark-inline-code">x %in% y</code></td>
+    <td class="cell-left">In set </td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x > y</code></td>
+    <td class="cell-left">Greater than</td>
+    <td class="cell-center"><code class="remark-inline-code">is.na(x)</code></td>
+    <td class="cell-left">Is missing</td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">==</code></td>
+    <td class="cell-left">Equal to</td>
+    <td class="cell-center"><code class="remark-inline-code">!is.na(x)</code></td>
+    <td class="cell-left">Is not missing</td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x <= y</code></td>
+    <td class="cell-left">Less than or equal to</td>
+  </tr>
+   <tr>
+    <td class="cell-center"><code class="remark-inline-code">  ! y</code></td>
+    <td class="cell-left">Not</td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x >= y</code></td>
+    <td class="cell-left">Greater than or equal to</td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x != y</code></td>
+    <td class="cell-left">Not equal to</td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x | y</code></td>
+    <td class="cell-left">Or </td>
+  </tr>
+  <tr>
+    <td class="cell-center"><code class="remark-inline-code">x & y</code></td>
+    <td class="cell-left">And</td>
+  </tr>
+</table>
+
+
+So lets return back to our Naboo example. If we wanted to reuse this dataset later we would assign it to an object using `<-` so lets assign it to an object named `naboo`
+
+```{r star-wars-example-filter, eval = FALSE}
+
+naboo <- filter(starwars, homeworld == "Naboo") 
+
+```
+
+```{r echo = FALSE}
+naboo <- filter(starwars, homeworld == "Naboo")  |>
+knitr::kable()
+```
+
+ 
+We can also combine multiple tests in filter. Lets say we wanted to all the characters that are from Naboo and are human 
+
+
+```{r eval = FALSE }
+ filter(starwars, homeworld == "Naboo" & species == "Human")
+```
+
+```{r echo = FALSE}
+ filter(starwars, homeworld == "Naboo" & species == "Human") |>
+ select(name, species, homeworld) |>
+ head(5) |>
+ knitr::kable()
+```
+
+Now we have all the characters that are from Naboo and are human! Filter automatically defaults to an and test. So these produce the same behavior. 
+
+```{r eval = FALSE}
+filter(starwars, homeworld == "Naboo" & species == "Human") 
+
+filter(starwars, homeworld == "Naboo", species == "Human")
+```
+
+```{r echo = FALSE}
+filter(starwars, homeworld == "Naboo" & species == "Human")  |> 
+select(name, homeworld, species) |>
+head(5) |>
+knitr::kable()
+
+filter(starwars, homeworld == "Naboo", species == "Human") |>
+select(name, homeworld, species) |>
+head(5) |>
+knitr::kable()
+
+```
+
+If we wanted characters from two different homeworlds we would do an or test using `|` (the key above enter/return)
+
+```{r eval = FALSE}
+filter(starwars, homeworld == "Naboo" | homeworld == "Tatooine")
+```
+
+```{r echo = FALSE}
+filter(starwars, homeworld == "Naboo" | homeworld == "Tatooine") |>
+select(name, homeworld) |>
+head(5) |>
+knitr::kable()
+```
+
+The reason we would use an or test is because one character can't have two homeworlds! Remember, computers are dumb. As long as the code can run, it will do it. So if we use an and test, this is what it returns
+
+```{r}
+filter(starwars, homeworld == "Naboo" & homeworld == "Tatooine")
+```
+
+When working with things in `R` stray commas and spelling will lead to headaches. Here is an example that would not throw an error but will create a dataframe with zero observations. Naboo exists as a value of homeworld, but naboo does not.  
+
+```{r dplyr-error, error= TRUE}
+
+ 
+ naboo <- filter(starwars, homeworld == "naboo")
+
+naboo <- filter(starwars, homeworld == "Naboo",)
+```
+
+Filter also works if you want particular values of something. Let's say we want penguins with longer flippers or characters less than a certain height. We can do that with filter. 
+
+```{r eval = FALSE}
+filter(starwars, height < mean(height, na.rm = TRUE))
+
+filter(penguins, flipper_length_mm > 2)
+```
+
+```{r echo = FALSE}
+filter(starwars, height < mean(height, na.rm = TRUE)) |>
+select(name, height, species) |>
+head(5) |>
+knitr::kable()
+
+filter(penguins, flipper_length_mm > 2) |>
+select(species, flipper_length_mm) |>
+head(5) |>
+knitr::kable()
+```
+
+
+Sometimes we want a dataset that does not have any missing values in it for a particular column. In this case all we do is just add `!` in front of the `is.na` function.
+
+```{r eval = FALSE}
+filter(starwars, !is.na(height))
+```
+
+```{r echo = FALSE}
+filter(starwars, !is.na(height)) |>
+select(name:eye_color) |>
+head(5) |>
+knitr::kable() 
+```
+ 
+
+We would do something similar if we wanted characters that are not human! 
+
+```{r}
+#| eval: false
+
+filter(starwars, species != "Human")
+
+```
+
+```{r}
+#| echo: false
+
+filter(starwars, species != "Human") |>
+head(5) |>
+knitr::kable()
+
+```
+
+One last operator that I will show you is the `%in%` operator. This comes in really handy for lots of things. Intuitively we can think about it as a bunch of `thing == "value"`| thing == "value"` tests glued together. Lets say we wanted all the characters from Tatooine, Naboo, and "Coruscant". With what we know we would do something like this.
+
+
+```{r}
+#| eval: false
+
+filter(starwars, homeworld == "Naboo" | homeworld == "Coruscant" | homeworld == "Tatooine")
+
+
+```
+
+While not the most amount of typing in the world this can quickly get to be a lot if there is a bunch of mutually exclusive things we need to subset our data by. This is where the `%in%`operator comes in to save us! We can rewrite this series of or tests like this 
+
+
+```{r}
+#| eval: false
+
+filter(starwars, homeworld %in% c("Naboo", "Coruscant", "Tatooine"))
+
+
+```
+
+```{r}
+#| echo: false
+
+filter(starwars, homeworld %in% c("Naboo", "Coruscant", "Tatooine")) |>
+select(name, homeworld) |>
+filter(str_detect(name, "Sky") | str_detect(homeworld, "Cor") | str_detect(name, "Pad")) |>
+knitr::kable() 
+
+
+
+```
+
+:::aside
+I have done some additional filtering behind the scenes to show you that it worked so your dataset likely looks a little different. 
+:::
+
+Notice how the test works. The first thing is the name of the variable and the second is the stuff the homeworlds. What `R` is doing is taking the values of the homeworld variable for each row and seeing if they match whats on the right hand side of `%in`. Kind of like this 
+
+```{r}
+
+5 %in% 1:10
+
+```
+
+If we wanted all things outside of this subset we can do this 
+
+```{r}
+#| eval: false
+
+filter(starwars, !homeworld %in% c("Naboo", "Coruscant", "Tatooine"))
+
+
+```
+
+```{r}
+#| echo: false
+
+filter(starwars, !homeworld %in% c("Naboo", "Coruscant", "Tatooine")) |>
+select(name, homeworld) |>
+head(5) |>
+knitr::kable()
+```
+
+
+
+### `mutate`
+
+`mutate` is how we create new columns in our dataset. There are tons of things that we may need to do in order to create variables. So lets start with making what we know as an indicator variable. Lets say we want to create a variable that indicates whether a character is human or not. We use the `ifelse` function to do this. The first thing we need to do is name the column. Lets call this column human. We then need to tell `R` what values the human variable has. If we want to create an indicator variable we can use the `ifelse` function in `R`  which kind of works like `filter`. 
+
+
+`ifelse` has a few components 
+
+```{r eval = FALSE}
+ifelse(test, what it does if true, what it does if false)
+```
+
+So in our case if the species column has a value of "human" than it returns `TRUE` otherwise return `FALSE`. 
+
+```{r eval = FALSE}
+mutate(starwars, human = ifelse(species == "Human", TRUE, FALSE))
+```
+
+```{r echo = FALSE}
+mutate(starwars, human = ifelse(species == "Human", TRUE, FALSE)) |>
+head(5) |>
+select(name, species) |>
+ knitr::kable()
+```
+
+`ifelse` is not just limited to `TRUE` or `FALSE` you can really put anything in there it is just easier if you do. Lets see a somewhat silly example with the palmerpenguins dataset 
+
+```{r eval = FALSE}
+mutate(penguins, big_peng = ifelse(body_mass_g > mean(body_mass_g, na.rm = TRUE), "Chonky penguin", "Not a Chonky penguin"))
+```
+
+```{r echo = FALSE}
+mutate(penguins, big_peng = ifelse(body_mass_g > mean(body_mass_g, na.rm = TRUE), "Chonky penguing", "Not a Chonky penguin")) |>
+select(body_mass_g, big_peng) |>
+head(5) |>
+knitr::kable()
+```
+
+
+R gives us a lot of flexibility to create all kinds of variables. So let's make a column in our dataset where we see how old a character is in dog years with a description, so other people know what is going on.
+
+
+```{r eval = FALSE}
+
+mutate(starwars,dog_years = paste(name, birth_year * 7, "in dog years")) 
+
+```
+
+```{r echo = FALSE}
+starwars |>
+mutate(dog_years = paste(name ,"is", birth_year * 7, "in dog years")) |>
+select(name, dog_years) |>
+head(5) |>
+kbl() |>
+kable_styling()
+```
+
+`mutate` is order aware. So if you want to do something with that new variable, you can do that in the same `mutate` call. If you want to do multiple things in mutate, that is also easy.
+
+```{r eval = FALSE}
+mutate(starwars, heightsqr = height^2,
+                 height_square_root = sqrt(heightsqr),
+                 human = ifelse(species == "human", TRUE, FALSE))
+```
+
+```{r echo = FALSE}
+
+mutate(starwars, heightsqr = height^2,
+                 height_square_root = sqrt(heightsqr),
+                 human = ifelse(species == "human", TRUE, FALSE)) |>
+    select(species, contains("height"), human) |>
+    head(5) |>
+    knitr::kable()
+
+```
+
+There are tons of different kinds of operations you can do with mutate! Each variable has different kinds of things you can and cannot do to them! If you want a more complete breakdown I suggest that you look at [R4Ds chapters 13:18](https://r4ds.hadley.nz/transform). For now we will set that aside. 
+
+### What if we want to do more than one thing at once?
+
+Generally, data cleaning consists of multiple steps. Sometimes we need to subset our data only to include the columns we care about and make a new variable. We could use what is known as a nested function call like this. 
+
+```{r eval = FALSE}
+select(mutate(starwars, human = ifelse(species == "human", TRUE, FALSE)), name, human)
+```
+
+```{r echo = FALSE}
+select(mutate(starwars, human = ifelse(species == "human", TRUE, FALSE)), name, human) |>
+head(5) |>
+knitr::kable()
+```
+
+Or we could create an intermediate object named `starwars_human_add` and then select the columns we want from there. However, both these solutions are annoying and unintuitive. We use `|>`, technically called a pipe, to combine multiple steps in our data-cleaning pipeline. However, you should read it as **and then**. The easiest way to think of the pipe when working through stuff is this way from [Andrew Heiss](https://twitter.com/andrewheiss/status/1359583543509348356?lang=en) using your morning routine.
+
+:::aside
+Behind the scenes, I have the `|>` all over the place. 
+
+:::
+
+```{r eval = FALSE}
+me |> 
+wake_up(time = "8.00am") |> 
+get_out_of_bed(side = "correct") |> 
+get_dressed(pants = "TRUE", shirt = "TRUE") |> 
+leave_house(car = TRUE, bike = FALSE, MARTA = FALSE) |> 
+am_late(traffic = TRUE)
+
+```
+
+This works because of the shared logic of the tidyverse 
+
+:::panel-tabset
+
+### Filter
+
+```{r echo = TRUE}
+filter(.data = penguins, species == "Gentoo")
+```
+
+### Select 
+
+```{r echo = TRUE}
+select(.data = penguins, species:bill_length_mm)
+```
+
+### Mutate 
+
+```{r echo = TRUE}
+mutate(.data = penguins, bill_length_mm_sq = bill_length_mm^2)
+```
+
+:::
+
+Note how each verb has the `.data` argument in the first position. The pipe takes what's on the left-hand side and evaluates it as the first argument on the right-hand side, so `starwars |>` passes the Starwars as the first argument in mutate. This lets chain together multiple operations. ***In my opinion*** is easier to decipher than large nested function calls like the left column in favor of a cleaner, easier-to-read version of the code on the right. 
+
+::: columns
+
+::: column
+
+```{r}
+ filter(mutate(penguins,
+  female = ifelse(sex == "female",
+    TRUE, FALSE)),
+     species == "Adelie")
+```
+
+:::
+
+::: column 
+
+```{r}
+penguins |>
+filter(species == "Adelie") |>
+mutate(female = ifelse(sex == "female", TRUE, FALSE))
+```
+
+:::
+:::
+
+::: callout
+The tidyverse has its own pipe that looks like `%>%`. This also works well. I use the pipe included in the latest versions of `R`. The keyboard shortcut for both is `ctrl + shift + m` in Windows and `cmd + shift + m` in Mac. To have the base R pipe appear go to `tools -> global options -> code -> then click on use native pipe operator.
+
+:::
+
+
+
+### `group_by` and `summarize`
+
+We to use these two commands together because they are pretty well matched. `group_by` collapses data to a single row by a column or columns in our dataset. Think of this as collapsing our data into your unit of analysis. Like country or if you have panel data where we observe multiple countries over multiple years, we can use `group_by` to look at `country and year`. Summarize will let you pass a whole host of functions to get descriptive measures of the data. 
+
+:::aside
+Both the British English and American English spellings of summarize work the same. The main author and maintainer of `dplyr` and lots of other stuff in the tidyverse is from New Zealand so *R For Data Science` uses British spellings.
+
+:::
+
+Imagine that we want to know the average height for each species. Using what you know about dplyr, you might write code like this with pipes. 
+
+
+
+
+```{r group-height, eval = FALSE}
+
+starwars |>
+group_by(species) |>
+summarise(mean(height))
+
+```
+
+```{r echo = FALSE}
+starwars |>
+group_by(species) |>
+summarise(mean(height)) |>
+head(5) |>
+knitr::kable()
+```
+
+Sometimes we want to count the number of species we have. There are many ways to do this in `R`. One of the most common you will see is. 
+
+```{r eval = FALSE}
+starwars |>
+group_by(species) |>
+summarise(n()) |>
+arrange(desc(`n()`))  # just sorts things from highest to lowest
+```
+
+```{r echo = FALSE}
+starwars |>
+group_by(species) |>
+summarise(n()) |>
+arrange(desc(`n()`))  |>
+head(5) |>
+knitr::kable()
+```
+
+
+We may also want to know the distinct number of species that live on each homeworld.  One nice thing about lots of the tidyverse functions is that we can assign new names to stuff within the function. When you are naming stuff in summarize, you are just making a new variable as we do in mutate.
+
+```{r eval = FALSE}
+starwars |>
+group_by(homeworld) |>
+summarise( distinct_species = n_distinct(species)) |>
+arrange(desc(distinct_species))
+```
+
+```{r echo = FALSE}
+starwars |>
+group_by(homeworld) |>
+summarise( distinct_species = n_distinct(species)) |>
+arrange(desc(distinct_species)) |>
+head(5) |>
+knitr::kable()
+```

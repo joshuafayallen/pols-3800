@@ -1,0 +1,35 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  search: true 
+  sidebar: 
+    collapse-level: 3
+    pinned: true
+  title: "An R Guide"
+  author: "Joshua Allen"
+  date: "7/18/2023"
+  chapters:
+    - index.qmd
+    - part: "Installation and Basics" 
+    - working-directories.qmd
+    - 01-installing-R-Rstudio.qmd
+    - 02-r-basics.qmd
+    - quarto-basics.qmd
+    - part: "Doing Stuff With Data"
+    - 04-wrangling-data-with-the-tidyverse.qmd
+    - visualizing-data-with-ggplot2.qmd
+    - part: "Beyond the Basics of The Tidyverse"
+
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+  pdf:
+    documentclass: scrreprt
+
+
+
