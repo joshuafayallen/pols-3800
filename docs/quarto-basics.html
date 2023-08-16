@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>An R Guide - 3&nbsp; Writing in Quarto</title>
+<title>An R Guide For Pols 3800 - 4&nbsp; Writing in Quarto</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -63,6 +63,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./04-wrangling-data-with-the-tidyverse.html" rel="next">
 <link href="./02-r-basics.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -108,7 +109,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./quarto-basics.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Writing in Quarto</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./quarto-basics.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing in Quarto</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -123,7 +124,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">An R Guide</a> 
+      <a href="./">An R Guide For Pols 3800</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/joshuafayallen/pols-3800" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -145,22 +149,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./working-directories.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Before We Get to The Fun Stuff</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./01-installing-R-Rstudio.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Installing R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-r-basics.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basics of R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basics of R</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./quarto-basics.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Writing in Quarto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing in Quarto</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Doing Stuff With Data</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-wrangling-data-with-the-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Intro to the tidyverse</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualizing-data-with-ggplot2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data Vizsualization</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Beyond the Basics of The Tidyverse</span></span>
+  </li>
     </ul>
     </div>
 </nav>
@@ -171,15 +201,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#how-to-get-a-pdf" id="toc-how-to-get-a-pdf" class="nav-link active" data-scroll-target="#how-to-get-a-pdf"><span class="header-section-number">3.1</span> How to Get a PDF</a>
+  <li><a href="#how-to-get-a-pdf" id="toc-how-to-get-a-pdf" class="nav-link active" data-scroll-target="#how-to-get-a-pdf"><span class="header-section-number">4.1</span> How to Get a PDF</a>
   <ul class="collapse">
-  <li><a href="#installing-quarto" id="toc-installing-quarto" class="nav-link" data-scroll-target="#installing-quarto"><span class="header-section-number">3.1.1</span> Installing Quarto</a></li>
+  <li><a href="#installing-quarto" id="toc-installing-quarto" class="nav-link" data-scroll-target="#installing-quarto"><span class="header-section-number">4.1.1</span> Installing Quarto</a></li>
   </ul></li>
-  <li><a href="#using-quarto-to-write" id="toc-using-quarto-to-write" class="nav-link" data-scroll-target="#using-quarto-to-write"><span class="header-section-number">3.2</span> Using Quarto to write</a>
+  <li><a href="#using-quarto-to-write" id="toc-using-quarto-to-write" class="nav-link" data-scroll-target="#using-quarto-to-write"><span class="header-section-number">4.2</span> Using Quarto to write</a>
   <ul class="collapse">
-  <li><a href="#working-with-the-source-editor" id="toc-working-with-the-source-editor" class="nav-link" data-scroll-target="#working-with-the-source-editor"><span class="header-section-number">3.2.1</span> Working with the Source Editor</a></li>
-  <li><a href="#writing-in-line" id="toc-writing-in-line" class="nav-link" data-scroll-target="#writing-in-line"><span class="header-section-number">3.2.2</span> Writing in line</a></li>
-  <li><a href="#code-and-chunk-options" id="toc-code-and-chunk-options" class="nav-link" data-scroll-target="#code-and-chunk-options"><span class="header-section-number">3.2.3</span> Code and Chunk options</a></li>
+  <li><a href="#working-with-the-source-editor" id="toc-working-with-the-source-editor" class="nav-link" data-scroll-target="#working-with-the-source-editor"><span class="header-section-number">4.2.1</span> Working with the Source Editor</a></li>
+  <li><a href="#writing-in-line" id="toc-writing-in-line" class="nav-link" data-scroll-target="#writing-in-line"><span class="header-section-number">4.2.2</span> Writing in line</a></li>
+  <li><a href="#code-and-chunk-options" id="toc-code-and-chunk-options" class="nav-link" data-scroll-target="#code-and-chunk-options"><span class="header-section-number">4.2.3</span> Code and Chunk options</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -189,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Writing in Quarto</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Writing in Quarto</span></h1>
 </div>
 
 
@@ -211,10 +241,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Things not being where you think they should be</p></li>
 </ul>
 <p>These are all fixable problems as long as we know what could be going on. For the most part as social scientists we want our documents in one of two formats either word or pdf. In this section we will mostly deal with pdf.</p>
-<section id="how-to-get-a-pdf" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="how-to-get-a-pdf"><span class="header-section-number">3.1</span> How to Get a PDF</h2>
-<section id="installing-quarto" class="level3" data-number="3.1.1">
-<h3 data-number="3.1.1" class="anchored" data-anchor-id="installing-quarto"><span class="header-section-number">3.1.1</span> Installing Quarto</h3>
+<section id="how-to-get-a-pdf" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="how-to-get-a-pdf"><span class="header-section-number">4.1</span> How to Get a PDF</h2>
+<section id="installing-quarto" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="installing-quarto"><span class="header-section-number">4.1.1</span> Installing Quarto</h3>
 <p>The process is relatively straight forward. Just go to <a href="https://quarto.org/docs/get-started/">the Quarto website</a> and click on the download button. This will install Quarto onto your machine so that is relatively straight forward!</p>
 <p>To produce pdfs Quarto relies on something called <span class="math inline">\(\LaTeX\)</span>. All you really need to know about <span class="math inline">\(\LaTeX\)</span> is that you need it to produce a PDF. To install LaTeX all you need to do is open an R script and copy and paste this code and run it and then type Y and hit enter.</p>
 <div class="cell">
@@ -226,12 +256,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Do get the output we want we need to do some stuff in order to tell quarto what type of document we want. You add this information at the top of the document like you would with word. However, it looks a little bit different since it relies on YAML(Yet Another Markdown Language) to add in this info.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Your YAML heading should look like this</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Quarto Guide"</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Josh Allen"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at">  </span><span class="st">"08/14/23"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at">  </span><span class="st">"08/16/23"</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> pdf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>From there you can pass additional options to it like what the citation style, the citation engine, the kind of font you want to use etc. So it looks something like this.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Quarto Guide"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Josh Allen"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="co"> # "08/14/23" # this is to show you how to add the current date</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="co"> # "08/16/23" # this is to show you how to add the current date</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span><span class="co"> # this turns off the table of contents</span></span>
@@ -249,8 +279,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="fu">biblio-style</span><span class="kw">:</span><span class="at"> apsr</span><span class="co"> # what style to choose </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="using-quarto-to-write" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="using-quarto-to-write"><span class="header-section-number">3.2</span> Using Quarto to write</h2>
+<section id="using-quarto-to-write" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="using-quarto-to-write"><span class="header-section-number">4.2</span> Using Quarto to write</h2>
 <p>If you work in the visual editor than lots of the stuff will be abstracted away. It should look somewhat familiar to a word</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -258,12 +288,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Lot of the same keyboard shortcuts should work! What changes is now you can insert executable code. The quickest way to do this is by doing <code>cmd + alt/option + I</code> on mac or <code>ctrl + alt/option + I</code> on a windows.</p>
-<section id="working-with-the-source-editor" class="level3" data-number="3.2.1">
-<h3 data-number="3.2.1" class="anchored" data-anchor-id="working-with-the-source-editor"><span class="header-section-number">3.2.1</span> Working with the Source Editor</h3>
+<section id="working-with-the-source-editor" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="working-with-the-source-editor"><span class="header-section-number">4.2.1</span> Working with the Source Editor</h3>
 <p>Personally I do not really like working with the visual editor which may just be because I started using <code>Rmarkdown</code> when the visual editor was not very good. One thing to know is that you will have to learn some new syntax to write which is fine and you will eventually get the hang of it.</p>
 </section>
-<section id="writing-in-line" class="level3" data-number="3.2.2">
-<h3 data-number="3.2.2" class="anchored" data-anchor-id="writing-in-line"><span class="header-section-number">3.2.2</span> Writing in line</h3>
+<section id="writing-in-line" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="writing-in-line"><span class="header-section-number">4.2.2</span> Writing in line</h3>
 <p>Often times we use <em>italics</em>, <strong>bold</strong>, or a mix of <strong><em>both</em></strong> to emphasize things. In word we would either click the button or in LaTex we would do <code>\textbf{something like this}</code>. If you have learned LaTeX you can still do <span class="math inline">\(\textbf{this}\)</span> but you would need to wrap it in dollar signs <code>$\textbf{}$</code>. Instead of doing all that what you can do is just take advantage of markdown syntax. In the table we can see how to do this</p>
 <table class="table">
 <colgroup>
@@ -302,8 +332,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>I have yet to come up with a good mneumonic device on how to remember the difference between italics and bold. Maybe some day.</p>
 </section>
-<section id="code-and-chunk-options" class="level3" data-number="3.2.3">
-<h3 data-number="3.2.3" class="anchored" data-anchor-id="code-and-chunk-options"><span class="header-section-number">3.2.3</span> Code and Chunk options</h3>
+<section id="code-and-chunk-options" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="code-and-chunk-options"><span class="header-section-number">4.2.3</span> Code and Chunk options</h3>
 <p>What differentiates Quarto from Word is the ability to embed code alongside words. To control how these appear in your document you need to add certain options to your code chunks. The most common thing you will want to do is stop the code from appearing in documents. For your problem sets or presenting to a more technical audience you will want to do this. We can do control that via <code>echo</code>. If we want people to see our code than we do <code>#| echo: true</code> like this</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r show-code}</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -325,8 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
-(`stat_bin()`).</code></pre>
+<pre><code>Warning: Removed 2 rows containing non-finite values (`stat_bin()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="quarto-basics_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
@@ -348,8 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
-(`stat_bin()`).</code></pre>
+<pre><code>Warning: Removed 2 rows containing non-finite values (`stat_bin()`).</code></pre>
 </div>
 <div class="cell-output-display">
 <p><img src="quarto-basics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -380,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 ✔ dplyr     1.1.2     ✔ readr     2.1.4
 ✔ forcats   1.0.0     ✔ stringr   1.5.0
 ✔ lubridate 1.9.2     ✔ tibble    3.2.1
-✔ purrr     1.0.1     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     ✔ tidyr     1.3.0
 ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 ✖ dplyr::filter() masks stats::filter()
 ✖ dplyr::lag()    masks stats::lag()
@@ -647,10 +675,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./02-r-basics.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Basics of R</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Basics of R</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./04-wrangling-data-with-the-tidyverse.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Intro to the tidyverse</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
