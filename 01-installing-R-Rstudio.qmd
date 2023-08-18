@@ -130,6 +130,13 @@ rstudioapi::terminalExecute(
 
 :::
 
+## Installing Rstudio
+
+So now that we have installed R we should install Rstudio. Rstudio is simply a way to interact with R that is a lot more user friendly.  You can google `RStudio Desktop Download` or [you can simple click on this hyperlink and it will take you to the download page](https://posit.co/download/rstudio-desktop/). Again just install the version of Rstudio that works with your operating system.
+
+
+
+
 ## Quarto 
 
 If you have read through the course syllabus you will notice that I am having you work in something called Quarto. You may be asking your self what is Quarto I have only used MS Word. Quarto embraces something called literate programming. Essentially what this means is that words and code appear side by side. This guide was created in Quarto and what I use the most. Since we are going to produce lots of graphs and tables in this class the typical workflow for that would look something like this 
