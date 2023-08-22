@@ -201,11 +201,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#r-tools-and-xcode" id="toc-r-tools-and-xcode" class="nav-link active" data-scroll-target="#r-tools-and-xcode"><span class="header-section-number">2.1</span> R Tools and XCode</a></li>
   <li><a href="#installing-rstudio" id="toc-installing-rstudio" class="nav-link" data-scroll-target="#installing-rstudio"><span class="header-section-number">2.2</span> Installing Rstudio</a></li>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto"><span class="header-section-number">2.3</span> Quarto</a></li>
-  <li><a href="#navigating-rstudio" id="toc-navigating-rstudio" class="nav-link" data-scroll-target="#navigating-rstudio"><span class="header-section-number">2.4</span> Navigating Rstudio</a>
+  <li><a href="#navigating-rstudio" id="toc-navigating-rstudio" class="nav-link" data-scroll-target="#navigating-rstudio"><span class="header-section-number">2.3</span> Navigating Rstudio</a>
   <ul class="collapse">
-  <li><a href="#r-rstudio-whats-the-difference" id="toc-r-rstudio-whats-the-difference" class="nav-link" data-scroll-target="#r-rstudio-whats-the-difference"><span class="header-section-number">2.4.1</span> R? Rstudio? Whats the Difference?</a></li>
-  <li><a href="#navigating-rstudio-1" id="toc-navigating-rstudio-1" class="nav-link" data-scroll-target="#navigating-rstudio-1"><span class="header-section-number">2.4.2</span> Navigating RStudio</a></li>
+  <li><a href="#r-rstudio-whats-the-difference" id="toc-r-rstudio-whats-the-difference" class="nav-link" data-scroll-target="#r-rstudio-whats-the-difference"><span class="header-section-number">2.3.1</span> R? Rstudio? Whats the Difference?</a></li>
+  <li><a href="#navigating-rstudio-1" id="toc-navigating-rstudio-1" class="nav-link" data-scroll-target="#navigating-rstudio-1"><span class="header-section-number">2.3.2</span> Navigating RStudio</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -334,59 +333,10 @@ Required Step
 <h2 data-number="2.2" class="anchored" data-anchor-id="installing-rstudio"><span class="header-section-number">2.2</span> Installing Rstudio</h2>
 <p>So now that we have installed R we should install Rstudio. Rstudio is simply a way to interact with R that is a lot more user friendly. You can google <code>RStudio Desktop Download</code> or <a href="https://posit.co/download/rstudio-desktop/">you can simple click on this hyperlink and it will take you to the download page</a>. Again just install the version of Rstudio that works with your operating system.</p>
 </section>
-<section id="quarto" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="quarto"><span class="header-section-number">2.3</span> Quarto</h2>
-<p>If you have read through the course syllabus you will notice that I am having you work in something called Quarto. You may be asking your self what is Quarto I have only used MS Word. Quarto embraces something called literate programming. Essentially what this means is that words and code appear side by side. This guide was created in Quarto and what I use the most. Since we are going to produce lots of graphs and tables in this class the typical workflow for that would look something like this</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figs/report_draft_loop.png" class="img-fluid figure-img" width="897"></p>
-<figcaption class="figure-caption">Credit for this image goes to Bruno Rodrigues</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>This involves lots of work for yourself. If you are doing a data analysis project where you produce 5 plots each time you make minor changes to those plots you are going to have to remember where those plots are, copy and paste them over, resize them or reformat them. This gets infinitely more annoying if you are reporting numbers in tables or in text. In some cases data analysis teams are constantly updating reports for stake holders based on new data. So if you have a report that says our “based on our model we would expect an increase of 8 blah blahs” and later you rerun the analysis cuz there was new data or you notice a mistake you have to figure out where exactly you said “8 blah blahs” and switch them.</p>
-<p>In Quarto this process is a whole lot easier. The loop looks like this</p>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="figs/md_draft_loop.png" class="img-fluid figure-img" width="900"></p>
-<figcaption class="figure-caption">Credit for this image goes to Bruno Rodrigues</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>You are changing the code for your figures in the document itself. So any changes are going to appear in the document automatically! You can also use code inline to automatically update numbers!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The average for our data is 50.5. In the document it looks like this</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(data)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>The average of our data is <span class="in">`r avg`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You may have noticed that our data only goes from 1 to 100. We can make a quick modification and the document will update the document accordingly without any copy and pasting!</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>avg <span class="ot">&lt;-</span> <span class="fu">mean</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The average of our data is 500.5</p>
-</section>
-<section id="navigating-rstudio" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="navigating-rstudio"><span class="header-section-number">2.4</span> Navigating Rstudio</h2>
-<section id="r-rstudio-whats-the-difference" class="level3" data-number="2.4.1">
-<h3 data-number="2.4.1" class="anchored" data-anchor-id="r-rstudio-whats-the-difference"><span class="header-section-number">2.4.1</span> R? Rstudio? Whats the Difference?</h3>
+<section id="navigating-rstudio" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="navigating-rstudio"><span class="header-section-number">2.3</span> Navigating Rstudio</h2>
+<section id="r-rstudio-whats-the-difference" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="r-rstudio-whats-the-difference"><span class="header-section-number">2.3.1</span> R? Rstudio? Whats the Difference?</h3>
 <ul>
 <li>R is a statistical programming language</li>
 <li>RStudio is a convenient interface for R (an Integrated Developer Environment, IDE)</li>
@@ -404,8 +354,8 @@ Required Step
 <p>The most common way that we interact with R is through Rstudio you can technically run R by just opening R and typing in code. But most people do not do this. It is not especially friendly to work in there is no syntax highlighting no code completetion. There isnt even really an option to add keyboard shortcuts. It is kind of like a Formula 1 car it can go real fast but it is not a comfortable drive.</p>
 <p>Rstudio has lots of handy features that help you. Much like a car you and I would drive. If we didn’t have the dashboard but still had the engine and some wheels and a steering we could drive the car if needed. However a car with a dashboard lets us figure out what the car is doing more easily.</p>
 </section>
-<section id="navigating-rstudio-1" class="level3" data-number="2.4.2">
-<h3 data-number="2.4.2" class="anchored" data-anchor-id="navigating-rstudio-1"><span class="header-section-number">2.4.2</span> Navigating RStudio</h3>
+<section id="navigating-rstudio-1" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="navigating-rstudio-1"><span class="header-section-number">2.3.2</span> Navigating RStudio</h3>
 <p>When you open up Rstudio it should look something like this.</p>
 <div class="cell">
 <div class="cell-output-display">

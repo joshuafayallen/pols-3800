@@ -2,9 +2,11 @@
 engine: knitr
 ---
 
+
+
 # Writing in Quarto
 
-We have covered what Quarto is, but not how we use it. Quarto is a really great tool because it lets you combine words and code together. It relies on something called markdown and pandoc to generate multiple formats. The details are [covered more extensively across the internet but this link does a really good job distilling what goes on](https://quarto.org/docs/faq/rmarkdown.html). What is incredibly infuriating about Quarto from a new user standpoint boils down to (in my experience) a few things:
+Quarto is a really great tool because it lets you combine words and code together. It relies on something called markdown and pandoc to generate multiple formats. The details are [covered more extensively across the internet but this link does a really good job distilling what goes on](https://quarto.org/docs/faq/rmarkdown.html). What is incredibly infuriating about Quarto from a new user standpoint boils down to (in my experience) a few things:
 
 - A new syntax to write in 
 
@@ -15,6 +17,78 @@ We have covered what Quarto is, but not how we use it. Quarto is a really great 
 
 
 These are all fixable problems as long as we know what could be going on. For the most part as social scientists we want our documents in one of two formats either word or pdf. In this section we will mostly deal with pdf. 
+
+## Quarto 
+
+If you have read through the course syllabus you will notice that I am having you work in something called Quarto. You may be asking your self what is Quarto I have only used MS Word. Quarto embraces something called literate programming. Essentially what this means is that words and code appear side by side. This guide was created in Quarto and what I use the most. Since we are going to produce lots of graphs and tables in this class the typical workflow for that would look something like this 
+
+
+```{r}
+#| echo: false
+#| fig-cap: "Credit for this image  goes to Bruno Rodrigues"
+knitr::include_graphics("figs/report_draft_loop.png")
+
+```
+
+
+
+This involves lots of work for yourself. If you are doing a data analysis project where you produce 5 plots each time you make minor changes to those plots you are going to have to remember where those plots are, copy and paste them over, resize them or reformat them. This gets infinitely more annoying if you are reporting numbers in tables or in text. In some cases data analysis teams are constantly updating reports for stake holders based on new data. So if you have a report that says our "based on our model we would expect an increase of 8 blah blahs" and later you rerun the analysis cuz there was new data or you notice a mistake you have to figure out where exactly you said "8 blah blahs" and switch them. 
+
+In Quarto this process is a whole lot easier. The loop looks like this
+
+```{r}
+#| echo: false
+#| fig-cap: "Credit for this image  goes to Bruno Rodrigues"
+knitr::include_graphics("figs/md_draft_loop.png")
+
+```
+
+
+
+You are changing the code for your figures in the document itself. So any changes are going to appear in the document automatically! You can also use code inline to automatically update numbers!
+
+
+```{r}
+data <- 1:100
+
+avg <- mean(data)
+
+```
+
+The average for our data is `r avg`. In the document it looks like this
+
+
+````{verbatim, lang = "markdown"}
+
+
+```{r}
+data <- 1:100
+
+avg <- mean(data)
+
+```
+The average of our data is `r avg`
+````
+
+
+
+
+
+You may have noticed that our data only goes from 1 to 100. We can make a quick modification and the document will update the document accordingly without any copy and pasting!
+
+```{r}
+
+data <- 1:1000
+
+avg <- mean(data)
+
+```
+
+
+
+
+The average of our data is `r avg`
+
 
 
 ## How to Get a PDF
