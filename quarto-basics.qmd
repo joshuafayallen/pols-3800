@@ -91,20 +91,20 @@ The average of our data is `r avg`
 
 
 
-## How to Get a PDF
-
-### Installing Quarto 
+## Installing Quarto 
 
 The process is relatively straight forward. Just go to [the Quarto website](https://quarto.org/docs/get-started/) and click on the download button. This will install Quarto onto your machine so that is relatively straight forward!
 
 
-To produce pdfs Quarto relies on something called $\LaTeX$. All you really need to know about $\LaTeX$ is that you need it to produce a PDF. To install LaTeX all you need to do is open an R script and copy and paste this code and run it and then type Y and hit enter.
+To produce pdfs Quarto relies on something called $\LaTeX$. All you really need to know about $\LaTeX$ is that you need it to produce a PDF. To install LaTeX all you need to do is open an R script and copy and paste this code and run it and then type Y and hit enter. 
 
 
 
 ```{r}
 #| eval: false
-
+# if you are on a mac you need to just 
+# delete the pound sign next to the install.packages() and run the code
+# install.packages("rstudioapi")
 rstudioapi::terminalExecute(
   command = "quarto install tinytex"
 )
